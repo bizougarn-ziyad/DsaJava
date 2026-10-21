@@ -1,45 +1,39 @@
 package AdjacencyListExercice;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Graph {
-    ArrayList<LinkedList<Node>> alist;
+
+    ArrayList<ArrayList<Node>> alist;
     Graph(){
         alist = new ArrayList<>();
     }
 
     public void addNode(Node node){
-        LinkedList<Node> currentList = new LinkedList<>();
+        ArrayList<Node> currentList = new ArrayList<>();
         currentList.add(node);
         alist.add(currentList);
     }
 
     public void addEdge(int src , int dst){
-        LinkedList<Node> currentList = alist.get(src);
-        Node dest = alist.get(dst).getFirst();
-        currentList.add(dest);
+        ArrayList<Node> currentList = alist.get(src);
+        Node destinationNode = alist.get(dst).getFirst();
+        currentList.add(destinationNode);
     }
 
     public boolean checkEdge(int src , int dst){
-        LinkedList<Node> currentList = alist.get(src);
-        Node dest = alist.get(dst).getFirst();
-        for(Node node : currentList){
-            if(node == dest){
-                return true;
-            }
-        }
-        return false;
+        ArrayList<Node> currentList = alist.get(src);
+        Node destinationNode = alist.get(dst).getFirst();
+        return currentList.contains(destinationNode);
     }
 
     public void print(){
-        for(LinkedList<Node> currentList : alist){
+        for(ArrayList<Node> currentList : alist){
             for(Node node : currentList){
-                System.out.print(node.name + " -> ");
+                System.out.print(node.val + " -> ");
             }
             System.out.println();
         }
     }
-
 
 }

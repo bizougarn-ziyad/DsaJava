@@ -4,31 +4,28 @@ public class MergeSort {
 
     public static void mergeSort(int[] array){
         int length = array.length;
-        if(length == 1) return;
-        int middle = array.length / 2 ;
+        if(length <= 1) return ;
+        int middle = length/2;
         int[] leftArray = new int[middle];
         int[] rightArray = new int[length - middle];
-        int i = 0 , j = 0 ;
-
-        for( ; i < length ; i++){
+        int i = 0 , j = 0;
+        for(; i < length ; i++){
             if(i < middle){
                 leftArray[i] = array[i];
-            }else{
+            }else {
                 rightArray[j] = array[i];
                 j++;
             }
         }
 
-
         mergeSort(leftArray);
         mergeSort(rightArray);
         merge(leftArray , rightArray , array);
-
     }
 
     public static void merge(int[] leftArray , int[] rightArray , int[] array){
         int leftSize = leftArray.length;
-        int rightSize = rightArray.length;
+        int rightSize = array.length - leftSize;
         int i = 0 , l = 0 , r = 0 ;
 
         while(l < leftSize && r < rightSize){
@@ -54,13 +51,11 @@ public class MergeSort {
             i++;
             r++;
         }
-
     }
 
 
-
     public static void main(String[] args) {
-        int[] array = {12,5,77,6,2,1,-22,-4,0,88,32};
+        int[] array = {5,6,77,8,-1,2,66,-9,10,0};
         mergeSort(array);
         System.out.println(Arrays.toString(array));
     }

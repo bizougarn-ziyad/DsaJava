@@ -4,16 +4,16 @@ public class Main {
     public static void main(String[] args) {
         Graph graph = new Graph();
 
-        graph.addNode(new Node("ziyad"));
-        graph.addNode(new Node("saad"));
-        graph.addNode(new Node("isra"));
-        graph.addNode(new Node("chaima"));
-        graph.addNode(new Node("imad"));
+        graph.addNode(new Node('A'));
+        graph.addNode(new Node('B'));
+        graph.addNode(new Node('C'));
 
         graph.addEdge(0,1);
         graph.addEdge(0,2);
-        graph.addEdge(3,4);
-        graph.addEdge(4,3);
+        graph.addEdge(2,1);
+
+        System.out.println(graph.checkEdge(1,2));
+        System.out.println(graph.checkEdge(0,1));
 
         graph.print();
     }

@@ -1,45 +1,55 @@
 package AdjacencyMatrix;
 
-import java.util.ArrayList;
-
 public class Graph {
-    // A graph is composed of nodes ( vertex ) and edges which are the connections between vertexes
-    //Directed Graphs are a type of graphs where the edge have a direction .
-    // we can use Adjacency Matrix ( Time  complexity O(1) but space complexity is O(V^2) or Adjacency List (Time
-    // complexity O(V) but space complexity is O(V+E) )
-    ArrayList<Node> nodes;
-    int[][] matrix;
-    Graph(int size){
-        nodes = new ArrayList<>();
-        matrix = new int[size][size];
+    private int[][] adjMatrix;
+    private int numVertices;
+
+    Graph(int numVertices){
+        this.numVertices = numVertices;
+        adjMatrix = new int[numVertices][numVertices];
     }
 
-    public void addNode(Node node){
-        nodes.add(node);
+    public void addEdge(int src , int dst ){
+        adjMatrix[src][dst] = 1 ;
+        adjMatrix[dst][src] = 1 ;
+    }
+    public void removeEdge(int src , int dst){
+        adjMatrix[src][dst] = 0 ;
+        adjMatrix[dst][src] = 0 ;
     }
 
-    public void addEdge(int src , int dst){
-        matrix[src][dst] = 1;
+    public void addVertice(){
+        int[][] newAdjMatrix = new int[numVertices + 1][numVertices + 1];
+
+        for(int i = 0 ; i < numVertices ; i++){
+            for(int j = 0 ; j < numVertices ; j++ ){
+                newAdjMatrix[i][j] = adjMatrix[i][j];
+            }
+        }
+
+        adjMatrix = newAdjMatrix;
+        numVertices++;
     }
 
-    public boolean checkEdge(int src , int dst){
-        return matrix[src][dst] == 1;
+    public void removeVertex(int v){
+        int[][] newAdjMatrix = new int[numVertices - 1][numVertices - 1];
+        for(int i = 0 ; i < numVertices ; i++){
+            for(int j = 0 ; j < numVertices ; j++){
+                if(i != v && j != v){
+                    newAdjMatrix[i][j] = adjMatrix[i][j];
+                }
+            }
+        }
+        adjMatrix = newAdjMatrix;
+        numVertices--;
     }
 
     public void print(){
-        System.out.print("  ");
-        for(Node node : nodes){
-            System.out.print(node.data + " ");
-        }
-        System.out.println();
-
-        for(int i=0 ; i < matrix.length ; i++){
-            System.out.print(nodes.get(i).data + " ");
-            for (int j = 0 ; j< matrix[i].length ; j++ ){
-                System.out.print(matrix[i][j] + " ");
+        for(int i = 0 ; i < numVertices ; i++){
+            for(int j = 0 ; j < numVertices ; j++){
+                System.out.print(adjMatrix[i][j] + "   ");
             }
             System.out.println();
         }
     }
-
 }

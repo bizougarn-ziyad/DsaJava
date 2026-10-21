@@ -1,9 +1,9 @@
 package AdjacencyListExercice;
 
 public class Node {
-    String name;
+    char val;
 
-    Node(String name){
-        this.name = name;
+    Node(char val){
+        this.val = val;
     }
 }
